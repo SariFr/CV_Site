@@ -6,7 +6,7 @@ namespace Service;
 public class GitHubService : IGitHubService
 { 
     private readonly GitHubClient _client;
-
+    private readonly GitHubIntegrationOptions _options;
     public GitHubService()
     {
             _client =new GitHubClient(new ProductHeaderValue("my-cool-app"));
