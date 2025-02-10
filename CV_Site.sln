@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{77CCB020-5C66-44DE-8242-49EBF79F369D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHub API", "GitHub API\GitHub API.csproj", "{A8A9CA2D-0AA0-4020-96DE-6FAB91DF4713}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77CCB020-5C66-44DE-8242-49EBF79F369D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CCB020-5C66-44DE-8242-49EBF79F369D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CCB020-5C66-44DE-8242-49EBF79F369D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CCB020-5C66-44DE-8242-49EBF79F369D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8A9CA2D-0AA0-4020-96DE-6FAB91DF4713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8A9CA2D-0AA0-4020-96DE-6FAB91DF4713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8A9CA2D-0AA0-4020-96DE-6FAB91DF4713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8A9CA2D-0AA0-4020-96DE-6FAB91DF4713}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
