@@ -1,5 +1,6 @@
 
 
+using GitHub_API.CachedServices;
 using Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<GitHubIntegrationOptions>(builder.Configuration.GetSection(nameof(GitHubIntegrationOptions)));
 builder.Services.AddGitHubIntegration(option => builder.Configuration.GetSection(nameof(GitHubIntegrationOptions)));
+
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IGitHubService, GitHubService>();
+builder.Services.Decorate<IGitHubService, CachedGitHubService>();
 
 var app = builder.Build();
 
