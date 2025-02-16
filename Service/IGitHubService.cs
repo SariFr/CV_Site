@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Octokit;
+using Service.DataEntities;
 
 namespace Service;
 
 public interface IGitHubService
 {
 
-    public Task<int> GetUserFollowersAsync(string userName);
-    public Task<List<Repository>> SearchRepositoriesInCSharp();
+    public Task<List<RepositoryPortfolio>> GetPortfolio();
+    public Task<List<Repository>> SearchRepositoriesAsync(string? userName, string? repoName, string? language);
 
 
 
