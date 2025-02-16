@@ -7,11 +7,11 @@ using Service.DataEntities;
 
 [Route("api/github")]
 [ApiController]
-public class RepoController : ControllerBase
+public class GitHubController : ControllerBase
 {
     private readonly IGitHubService _gitHubService;
 
-    public RepoController(IGitHubService gitHubService)
+    public GitHubController(IGitHubService gitHubService)
     {
         _gitHubService = gitHubService;
     }
