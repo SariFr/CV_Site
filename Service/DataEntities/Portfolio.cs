@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.DataEntities
 {
-    public class RepositoryPortfolio
+    public class Portfolio
     {
         public string Name { get; set; }
         public string HtmlUrl { get; set; }

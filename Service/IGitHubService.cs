@@ -11,7 +11,7 @@ namespace Service;
 public interface IGitHubService
 {
 
-    public Task<List<RepositoryPortfolio>> GetPortfolio();
+    public Task<List<Portfolio>> GetPortfolio();
     public Task<List<Repository>> SearchRepositoriesAsync(string? userName, string? repoName, string? language);
 
 

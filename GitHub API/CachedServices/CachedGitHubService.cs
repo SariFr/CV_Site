@@ -15,17 +15,17 @@ namespace GitHub_API.CachedServices
             _memoryCache = memoryCache;
         }
         private const string UserPortfolioKey = "UserPortfolioKey";
-        public async Task<List<RepositoryPortfolio>> GetPortfolio()
+        public async Task<List<Portfolio>> GetPortfolio()
         {
-            if (_memoryCache.TryGetValue(UserPortfolioKey, out List<RepositoryPortfolio> repositoryPortfolio))
-                return repositoryPortfolio;
+            if (_memoryCache.TryGetValue(UserPortfolioKey, out List<Portfolio> Portfolio))
+                return Portfolio;
 
             var cacheOptions = new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(TimeSpan.FromSeconds(30))
+                .SetAbsoluteExpiration(TimeSpan.FromSeconds(300))
                 .SetSlidingExpiration(TimeSpan.FromSeconds(10));
-            repositoryPortfolio= await _gitHubService.GetPortfolio();
-            _memoryCache.Set(UserPortfolioKey, repositoryPortfolio,cacheOptions);
-            return repositoryPortfolio;
+            Portfolio= await _gitHubService.GetPortfolio();
+            _memoryCache.Set(UserPortfolioKey, Portfolio,cacheOptions);
+            return Portfolio;
         }
 
         public Task<List<Repository>> SearchRepositoriesAsync(string? userName, string? repoName, string? language)

@@ -9,12 +9,7 @@ public class GitHubService : IGitHubService
 { 
     private readonly GitHubClient _client;
     private readonly GitHubIntegrationOptions _options;
-    //public GitHubService(IOptions<GitHubIntegrationOptions> options) 
-    //{
-    //    _client =new GitHubClient(new ProductHeaderValue("my-cool-app"));
-    //    _options = options.Value;
 
-    //}
     public GitHubService(IOptions<GitHubIntegrationOptions> options)
     {
         _options = options.Value;
@@ -26,22 +21,10 @@ public class GitHubService : IGitHubService
     }
 
 
-
-
-    //public async Task<int> GetUserFollowersAsync(string userName)
-
-    //        {
-
-    //            var user = await _client.User.Get(userName);
-
-    //            return user.Followers;
-
-    //        }
-
-    public async Task<List<RepositoryPortfolio>> GetPortfolio()
+    public async Task<List<Portfolio>> GetPortfolio()
     {
         var repositories = await _client.Repository.GetAllForCurrent();
-        var portfolio = new List<RepositoryPortfolio>();
+        var portfolio = new List<Portfolio>();
 
         foreach (var repo in repositories)
         {
@@ -51,7 +34,7 @@ public class GitHubService : IGitHubService
             var pullRequests = await _client.PullRequest.GetAllForRepository(repo.Owner.Login, repo.Name);
             int pullRequestCount = pullRequests.Count;
 
-            portfolio.Add(new RepositoryPortfolio
+            portfolio.Add(new Portfolio
             {
                 Name = repo.Name,
                 HtmlUrl = repo.HtmlUrl,
@@ -66,50 +49,6 @@ public class GitHubService : IGitHubService
     }
 
 
-    //public async Task<List<Repository>> SearchRepositoriesAsync(string? userName, string? repoName, string? language)
-    //{
-    //    Language? languageEnum = null;
-
-    //    if (!string.IsNullOrWhiteSpace(language) && Enum.TryParse(language, true, out Language parsedLanguage))
-    //    {
-    //        languageEnum = parsedLanguage;
-    //    }
-
-    //    var request = new SearchRepositoriesRequest(repoName ?? string.Empty)
-    //    {
-    //        Language = languageEnum,
-    //        User = userName
-    //    };
-
-
-    //    var result = await _client.Search.SearchRepo(request);
-    //    return result.Items.ToList();
-    //}
-    //public async Task<List<Repository>> SearchRepositoriesAsync(string? userName, string? repoName, string? language)
-    //{
-    //    // אם כל הפרמטרים ריקים, נחזיר רשימה ריקה
-    //    if (string.IsNullOrWhiteSpace(userName) && string.IsNullOrWhiteSpace(repoName) && string.IsNullOrWhiteSpace(language))
-    //    {
-    //        return new List<Repository>();
-    //    }
-
-    //    Language? languageEnum = null;
-    //    if (!string.IsNullOrWhiteSpace(language) && Enum.TryParse(language, true, out Language parsedLanguage))
-    //    {
-    //        languageEnum = parsedLanguage;
-    //    }
-
-    //    // בדיקה: אם repoName ריק, ניתן ערך ברירת מחדל תקף
-    //    var request = new SearchRepositoriesRequest(string.IsNullOrWhiteSpace(repoName) ? "github" : repoName)
-    //    {
-    //        Language = languageEnum,
-    //        User = userName
-    //    };
-
-    //    var result = await _client.Search.SearchRepo(request);
-    //    return result.Items.ToList();
-    //}
-
     public async Task<List<Repository>> SearchRepositoriesAsync(string? userName, string? repoName, string? language)
     {
         Language? languageEnum = null;
@@ -118,12 +57,10 @@ public class GitHubService : IGitHubService
             languageEnum = parsedLanguage;
         }
 
-        // אם יש שם משתמש - נקבל ישירות את הריפוזיטוריז שלו
         if (!string.IsNullOrWhiteSpace(userName))
         {
             var userRepositories = await _client.Repository.GetAllForUser(userName);
 
-            // סינון לפי שם ריפוזיטורי ושפה אם סופקו
             var filteredRepos = userRepositories
                 .Where(repo =>
                     (string.IsNullOrWhiteSpace(repoName) || repo.Name.Contains(repoName, StringComparison.OrdinalIgnoreCase)) &&
@@ -133,7 +70,6 @@ public class GitHubService : IGitHubService
             return filteredRepos;
         }
 
-        // חיפוש כללי כאשר אין שם משתמש
         var request = new SearchRepositoriesRequest(string.IsNullOrWhiteSpace(repoName) ? "github" : repoName)
         {
             Language = languageEnum
